@@ -191,7 +191,7 @@ plugins: [
 
 </details>
 
-Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example-theme` theme! All `text-themeable-*` class uses the CSS variable from the generated CSS of your configuration. `tailwindcss-themeable` already has two themes (`dracula` and `material`) you can use directly.
+Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example-theme` theme! All `text-themeable-*` class uses the CSS variable from the generated CSS of your configuration. `tailwindcss-themeable` already has two built-in themes (`dracula` and `material`) you can use directly.
 
 ```html
 <div class="themeable-example-theme">
