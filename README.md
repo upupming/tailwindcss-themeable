@@ -2,9 +2,19 @@
 
 Multiple themes support for tailwindcss and windicss. Developing with one theme and it will work with multiple themes, all you need is just to define your default (for shade `500`) color values for your theme. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
 
-|Dracula (default theme), Demo Link|Material, Demo Link|
+|Dracula (default theme)|Material|
 |-------|--------|
 |![dracula](img/dracula.png)|![material](img/material.png)|
+
+Demo Link:
+
+- Windi: https://upupming.site/tailwindcss-themeable/windi/
+- Tailwind: https://upupming.site/tailwindcss-themeable/tailwind/
+
+Demo source code:
+
+- [Windi](examples/windi/index.html)
+- [Tailwind](examples/tailwind/index.html)
 
 ## Installation
 
@@ -181,10 +191,20 @@ plugins: [
 
 </details>
 
-Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example` theme! All `text-themeable-*` class uses the CSS variable from the generated CSS of your configuration.
+Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example-theme` theme! All `text-themeable-*` class uses the CSS variable from the generated CSS of your configuration. `tailwindcss-themeable` already has two themes (`dracula` and `material`) you can use directly.
 
 ```html
 <div class="themeable-example-theme">
+    <div class="text-themeable-foreground">
+        Hello world!
+    </div>
+</div>
+<div class="themeable-dracula">
+    <div class="text-themeable-foreground">
+        Hello world!
+    </div>
+</div>
+<div class="themeable-material">
     <div class="text-themeable-foreground">
         Hello world!
     </div>
