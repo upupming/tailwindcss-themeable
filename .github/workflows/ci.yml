@@ -25,7 +25,7 @@ jobs:
         run: |
           pnpm i
           pnpm run build
-          (cd examples/tailwind && pnpm run build && cp -r dist/ ../../dist/tailwind)
+          (cd examples/tailwind && pnpm run build && cp -r dist/ ../../dist/tailwind && cp -r dist/ ../../dist)
           (cd examples/windi && pnpm run build && cp -r dist/ ../../dist/windi)
 
       - name: Deploy 🚀
