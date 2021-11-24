@@ -1,0 +1,22 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.link {
+  @apply hover:text-themeable-cyan-500
+    hover:border-themeable-cyan-500
+    hover:border-b-2
+    transition;
+}
+
+.text-link {
+  @apply text-themeable-cyan-700
+    hover:text-themeable-cyan-800
+    transition;
+}
+
+/* show menu when dropdown is hovering */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}

@@ -1,0 +1,30 @@
+{
+  "cSpell.words": ["tailwindcss", "themeable", "vite", "windi", "windicss"], // Use eslint to format js/ts files
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  // Disable css built-in lint
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "html", "vue"],
+  // Use prettier to format files
+  "editor.formatOnSave": true,
+  // Since we use eslint to format js/ts files, so we have to disable prettier to avoid confilcts
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2
+}

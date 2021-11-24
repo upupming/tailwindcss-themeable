@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Windi CSS Themeable</title>
+    <script async src="./main.ts" type="module"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://draculatheme.com/static/img/favicon.ico"
+    />
+  </head>
+
+  <body class="bg-themeable-background">
+    <nav
+      class="
+        z-50
+        sticky
+        top-0
+        flex
+        justify-between
+        bg-themeable-selection
+        px-8
+        py-4
+        text-themeable-foreground
+      "
+    >
+      <div class="font-bold text-xl flex items-center">Windi CSS Themeable</div>
+      <ul class="flex items-center space-x-8 font-semibold">
+        <li>
+          <div class="dropdown block relative">
+            <button
+              class="
+                bg-themeable-cyan
+                text-themeable-background
+                font-semibold
+                py-2
+                px-4
+                rounded
+                inline-flex
+                items-center
+              "
+            >
+              <span class="mr-1">Theme</span>
+              <svg
+                class="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                />
+              </svg>
+            </button>
+            <ul
+              class="
+                dropdown-menu
+                absolute
+                hidden
+                text-themeable-background
+                pt-1
+              "
+            >
+              <li class="">
+                <a
+                  class="
+                    rounded-t
+                    bg-themeable-foreground
+                    hover:bg-themeable-cyan
+                    py-2
+                    px-4
+                    block
+                    whitespace-no-wrap
+                  "
+                  href="#"
+                  onclick="changeTheme('dracula')"
+                  >Dracula</a
+                >
+              </li>
+              <li class="">
+                <a
+                  class="
+                    rounded-b
+                    bg-themeable-foreground
+                    hover:bg-themeable-cyan
+                    py-2
+                    px-4
+                    block
+                    whitespace-no-wrap
+                  "
+                  href="#"
+                  onclick="changeTheme('material')"
+                  >Material</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a
+            class="link"
+            href="https://github.com/upupming/tailwindcss-themeable"
+            >GitHub</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <div class="m-8 space-y-4 mb-20 text-themeable-foreground">
+      <figure class="md:flex rounded-xl p-8 md:p-0 bg-themeable-selection">
+        <img
+          class="
+            w-32
+            h-32
+            p-4
+            md:w-48 md:h-auto md:rounded-l-xl md:rounded-r-none
+            rounded-full
+            mx-auto
+          "
+          src="https://draculatheme.com/static/icons/pack-1/045-dracula.svg"
+          alt=""
+          width="384"
+          height="512"
+        />
+        <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+          <blockquote>
+            <p class="text-lg font-semibold">
+              Multiple themes support for tailwindcss. Developing with one theme
+              and it works with multiple themes, all you need is just to define
+              your default (for shade <code>500</code>) color values for your
+              theme. We will generate all shades from <code>50</code> to
+              <code>900</code> for you, following the built-in shade name
+              convention of the
+              <a
+                href="https://tailwindcss.com/docs/customizing-colors"
+                class="text-link"
+                >default color values</a
+              >.
+            </p>
+          </blockquote>
+          <figcaption class="font-medium">
+            <div class="text-themeable-cyan-600">Yiming Li</div>
+            <div class="text-themeable-foreground-600">GitHub ID: upupming</div>
+          </figcaption>
+        </div>
+      </figure>
+      <div
+        class="
+          relative
+          z-10
+          rounded-xl
+          shadow-lg
+          divide-y-2 divide-themeable-orange
+          flex flex-col
+        "
+      >
+        <section class="flex flex-row">
+          <h3
+            class="
+              flex-none
+              w-48
+              bg-themeable-orange-200
+              rounded-tl-xl
+              text-lg
+              leading-6
+              font-semibold
+              text-themeable-orange
+              px-4
+              py-3
+              p-8
+            "
+          >
+            Themeable
+          </h3>
+          <dl
+            class="
+              flex-auto
+              bg-themeable-selection
+              rounded-tr-xl
+              px-4
+              py-6
+              p-6
+              space-y-6
+            "
+          >
+            <div class="space-y-1">
+              <dd class="text-2xl leading-7 font-semibold" style="opacity: 1">
+                How it wroks
+              </dd>
+            </div>
+            <div class="space-y-1">
+              <dd
+                class="text-themeable-foreground-600 text-sm"
+                style="opacity: 1"
+              >
+                We follow the
+                <a href="https://draculatheme.com/contribute" class="text-link"
+                  >Dracula color palette definition</a
+                >
+                for the name convention of all colors. All shades are
+                automatically generated, so it may not look nicely as the
+                <a
+                  href="https://tailwindcss.com/docs/customizing-colors"
+                  class="text-link"
+                  >tailwindcss official shades</a
+                >
+                (which is manually chosen). You can override the auto generated
+                values if you wish by passing an object with different shades to
+                a palette.
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section class="flex flex-row overflow-hidden">
+          <h3
+            class="
+              flex-none
+              w-48
+              bg-themeable-orange-200
+              rounded-bl-xl
+              text-lg
+              leading-6
+              font-semibold
+              text-themeable-orange
+              px-4
+              py-3
+              p-8
+            "
+          >
+            Current Theme Colors
+          </h3>
+          <div
+            class="
+              relative
+              flex-auto
+              bg-themeable-selection
+              rounded-br-xl
+              overflow-hidden
+              text-themeable-foreground-600
+            "
+          >
+            <dl class="px-4 py-6 p-6 space-y-6">
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">
+                  bg-themeable-background-{50-900}
+                </dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-background-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">
+                  bg-themeable-foreground-{50-900}
+                </dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-foreground-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">
+                  bg-themeable-selection-{50-900}
+                </dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-selection-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-comment-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-comment-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-cyan-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-cyan-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-green-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-green-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-orange-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-orange-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-pink-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-pink-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-purple-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-purple-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-red-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-red-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="space-y-2">
+                <dt class="font-mono text-xs">bg-themeable-yellow-{50-900}</dt>
+                <dd>
+                  <ul class="flex -space-x-1">
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-50"
+                      style="z-index: 10"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-100"
+                      style="z-index: 9"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-200"
+                      style="z-index: 8"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-300"
+                      style="z-index: 7"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-400"
+                      style="z-index: 6"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-500"
+                      style="z-index: 5"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-600"
+                      style="z-index: 4"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-700"
+                      style="z-index: 3"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-800"
+                      style="z-index: 2"
+                    ></li>
+                    <li
+                      class="w-8 h-8 rounded-full bg-themeable-yellow-900"
+                      style="z-index: 1"
+                    ></li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
