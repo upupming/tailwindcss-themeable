@@ -6,7 +6,7 @@ export default defineConfig({
     themeable({
       themes: [
         {
-          name: 'one-dark-pro',
+          name: 'example-theme',
           palette: {
             background: '#282A36',
             foreground: '#F8F8F2',

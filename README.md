@@ -191,24 +191,38 @@ plugins: [
 
 </details>
 
-Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example-theme` theme! All `text-themeable-*` class uses the CSS variable from the generated CSS of your configuration. `tailwindcss-themeable` already has two built-in themes (`dracula` and `material`) you can use directly.
+Then you can wrap you HTML elements with `themeable-example-theme` class to use the `example-theme` theme! All `text-themeable-*`, `bg-themeable-*`, and so on... classes use the CSS variable from the generated CSS of your configuration. `tailwindcss-themeable` already has two built-in themes (`dracula` and `material`) you can use directly.
 
 ```html
 <div class="themeable-example-theme">
-    <div class="text-themeable-foreground">
+    <div class="text-themeable-foreground bg-themeable-background">
         Hello world!
     </div>
 </div>
 <div class="themeable-dracula">
-    <div class="text-themeable-foreground">
+    <div class="text-themeable-foreground bg-themeable-background">
         Hello world!
     </div>
 </div>
 <div class="themeable-material">
-    <div class="text-themeable-foreground">
+    <div class="text-themeable-foreground bg-themeable-background">
         Hello world!
     </div>
 </div>
+```
+
+Compiled CSS:
+
+```css
+.text-themeable-foreground {
+  --tw-text-opacity: 1;
+  color: rgba(var(--themeable-foreground), var(--tw-text-opacity));
+}
+
+.bg-themeable-background {
+  --tw-bg-opacity: 1;
+  background-color: rgba(var(--themeable-background), var(--tw-bg-opacity));
+}
 ```
 
 <hr>
