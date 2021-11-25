@@ -21,7 +21,7 @@ Demo source code:
 ## Installation
 
 ```bash
-npm i tailwindcss-themeable
+npm i -D tailwindcss-themeable
 ```
 
 ## Usage
