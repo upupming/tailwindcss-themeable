@@ -1,6 +1,8 @@
 # tailwindcss-themeable
 
-Multiple themes support for tailwindcss and windicss. Developing with one theme and it will work with multiple themes, all you need is just to define your default (for shade `500`) color values for your theme. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
+Adds multiple themes support for Tailwind CSS and Windi CSS.
+
+You can just develop your app with one theme and it will work with multiple themes palette colors, all you need is just to specify your default (for shade `500`) color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
 
 |Dracula (default theme)|Material|
 |-------|--------|
@@ -8,13 +10,13 @@ Multiple themes support for tailwindcss and windicss. Developing with one theme 
 
 Demo Link:
 
-- Windi: https://upupming.site/tailwindcss-themeable/windi/
-- Tailwind: https://upupming.site/tailwindcss-themeable/tailwind/
+- Windi CSS: https://upupming.site/tailwindcss-themeable/windi/
+- Tailwind CSS: https://upupming.site/tailwindcss-themeable/tailwind/
 
 Demo source code:
 
-- [Windi](examples/windi/index.html)
-- [Tailwind](examples/tailwind/index.html)
+- [Windi CSS](examples/windi/index.html)
+- [Tailwind CSS](examples/tailwind/index.html)
 
 ## Installation
 
