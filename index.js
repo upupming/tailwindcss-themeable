@@ -47,7 +47,20 @@ var plugin_default = createPlugin;
 
 // src/index.ts
 var _colorconvert = require('color-convert'); var _colorconvert2 = _interopRequireDefault(_colorconvert);
-var shadeStops = [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var builtinPaletteKeys = [
+  "background",
+  "foreground",
+  "selection",
+  "comment",
+  "cyan",
+  "green",
+  "orange",
+  "pink",
+  "purple",
+  "red",
+  "yellow"
+];
+var shadeStops = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 var themeDracula = {
   name: "dracula",
   palette: {
@@ -84,24 +97,23 @@ var builtinThemes = [themeDracula, themeMaterial];
 var clamp = (val, min = 0, max = 100) => {
   return Math.min(Math.max(val, min), max);
 };
-var color2Shades = (hex, shadeLightenStep = 8, shadeDarkenStep = 11) => {
-  const [h, s, l] = _colorconvert2.default.hex.hsl.raw(hex);
-  const defaultStop = 5;
-  const generatedHexColors = shadeStops.map((stop) => {
-    const diff = stop - defaultStop;
+var fillColorShades = (shades, shadeLightenStep = 8, shadeDarkenStep = 11) => {
+  const { DEFAULT } = shades;
+  const [h, s, l] = _colorconvert2.default.hex.hsl.raw(DEFAULT);
+  const defaultStop = 500;
+  shadeStops.forEach((stop) => {
+    if (shades[stop] !== void 0)
+      return;
+    const diff = (stop - defaultStop) / 100;
+    let hex;
     if (diff < 0) {
-      return _colorconvert2.default.hsl.hex([h, s, clamp(l + Math.abs(diff) * shadeLightenStep)]);
+      hex = _colorconvert2.default.hsl.hex([h, s, clamp(l + Math.abs(diff) * shadeLightenStep)]);
     } else {
-      return _colorconvert2.default.hsl.hex([h, s, clamp(l - Math.abs(diff) * shadeDarkenStep)]);
+      hex = "#" + _colorconvert2.default.hsl.hex([h, s, clamp(l - Math.abs(diff) * shadeDarkenStep)]);
     }
-  }).map((hex2) => `#${hex2}`);
-  const ans = {
-    DEFAULT: hex
-  };
-  shadeStops.forEach((stop, idx) => {
-    ans[stop * 100] = generatedHexColors[idx];
+    shades[stop] = `#${hex}`;
   });
-  return ans;
+  return shades;
 };
 var withOpacity = (variableName) => {
   return ({ opacityValue = 1 }) => {
@@ -118,18 +130,19 @@ var themeable = plugin_default.withOptions(({
 }) => ({ addBase }) => {
   themes = [...builtinThemes, ...themes];
   themes.forEach((theme) => {
-    let paletteKey;
-    for (paletteKey in theme.palette) {
+    for (const paletteKey in theme.palette) {
       const color = theme.palette[paletteKey];
       let colorShades;
       if (typeof color === "string") {
-        colorShades = color2Shades(color, shadeLightenStep, shadeDarkenStep);
+        colorShades = { DEFAULT: color };
       } else {
         colorShades = color;
       }
-      for (const shade in colorShades) {
+      const colorShadesComputed = fillColorShades(colorShades, shadeLightenStep, shadeDarkenStep);
+      let shade;
+      for (shade in colorShadesComputed) {
         const key = paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade);
-        const value = _colorconvert2.default.hex.rgb.raw(colorShades[shade]).join(", ");
+        const value = _colorconvert2.default.hex.rgb.raw(colorShadesComputed[shade]).join(", ");
         const rawRgbStyle = __spreadValues({
           [`.${classPrefix}-${theme.name}`]: {
             [key]: value
@@ -143,18 +156,31 @@ var themeable = plugin_default.withOptions(({
       }
     }
   });
-}, ({ classPrefix = "themeable" }) => {
-  const { palette } = themeDracula;
+}, ({ classPrefix = "themeable", themes = [] }) => {
+  themes = [...builtinThemes, ...themes];
   const colors = {};
-  let paletteKey;
-  for (paletteKey in palette) {
+  const paletteKeysSeen = new Set();
+  themes.forEach((theme) => {
+    for (const paletteKey in theme.palette) {
+      paletteKeysSeen.add(paletteKey);
+    }
+  });
+  for (const paletteKey of paletteKeysSeen) {
     const paletteInstance = {};
     for (const stop of shadeStops) {
-      const shade = stop * 100;
-      paletteInstance[shade] = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade));
+      paletteInstance[stop] = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, stop));
     }
     paletteInstance.DEFAULT = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, "DEFAULT"));
     colors[`${classPrefix}-${paletteKey}`] = paletteInstance;
+    if (builtinPaletteKeys.includes(paletteKey))
+      continue;
+    for (const theme of themes) {
+      if (builtinThemes.includes(theme))
+        continue;
+      if (theme.palette[paletteKey] === void 0) {
+        console.warn(`[tailwindcss-themeable]: theme ${theme.name} missing the palette ${paletteKey}, please add the palette key to theme or delete the palette key from other themes to avoid inconsistent`);
+      }
+    }
   }
   return {
     theme: {
@@ -173,4 +199,5 @@ var themeable = plugin_default.withOptions(({
 
 
 
-exports.builtinThemes = builtinThemes; exports.clamp = clamp; exports.color2Shades = color2Shades; exports.paletteKeyShade2CSSVariable = paletteKeyShade2CSSVariable; exports.shadeStops = shadeStops; exports.themeDracula = themeDracula; exports.themeMaterial = themeMaterial; exports.themeable = themeable;
+
+exports.builtinPaletteKeys = builtinPaletteKeys; exports.builtinThemes = builtinThemes; exports.clamp = clamp; exports.fillColorShades = fillColorShades; exports.paletteKeyShade2CSSVariable = paletteKeyShade2CSSVariable; exports.shadeStops = shadeStops; exports.themeDracula = themeDracula; exports.themeMaterial = themeMaterial; exports.themeable = themeable;

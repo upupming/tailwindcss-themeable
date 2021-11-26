@@ -4,24 +4,30 @@ import * as windicss_types_interfaces from 'windicss/types/interfaces';
  * https://github.com/dracula/visual-studio-code/blob/d0b71bb57a591cdf11d43566831bb64c8899d783/src/dracula.yml#L9-L20
  * https://spec.draculatheme.com/#sec-Standard
  */
-declare type PaletteKeys = 'background' | 'foreground' | 'selection' | 'comment' | 'cyan' | 'green' | 'orange' | 'pink' | 'purple' | 'red' | 'yellow';
+declare const builtinPaletteKeys: readonly ["background", "foreground", "selection", "comment", "cyan", "green", "orange", "pink", "purple", "red", "yellow"];
+declare type PaletteKeys = typeof builtinPaletteKeys[number];
+/** The smaller the stop, the lighter the generated color */
+declare const shadeStops: readonly [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+declare type DEFAULT = 'DEFAULT';
+declare type ShadeStops = typeof shadeStops[number];
+declare type ColorShadeKeys = DEFAULT | ShadeStops;
 declare type ColorHex = `#${string}`;
-interface ColorShades {
-    '50': ColorHex;
-    '100': ColorHex;
-    '200': ColorHex;
-    '300': ColorHex;
-    '400': ColorHex;
-    '500': ColorHex;
-    '600': ColorHex;
-    '700': ColorHex;
-    '800': ColorHex;
-    '900': ColorHex;
-    DEFAULT: ColorHex;
-}
-declare const shadeStops: number[];
+declare type ColorShades = {
+    [stop in ShadeStops]?: ColorHex;
+} & {
+    [key in DEFAULT]: ColorHex;
+};
+/**
+ * When all shades are already computed, type `ColorShades` will becomes `ColorShadesComputed`
+ */
+declare type ColorShadesComputed = {
+    [key in ColorShadeKeys]: ColorHex;
+};
 declare type ThemePalette = {
-    [key in PaletteKeys]: ColorHex | ColorShades;
+    [key in PaletteKeys]?: ColorHex | ColorShades;
+} & {
+    /** User can define extra palette keys */
+    [key: string]: ColorHex | ColorShades;
 };
 interface Theme {
     name: string;
@@ -64,8 +70,11 @@ declare const themeDracula: Theme;
 declare const themeMaterial: Theme;
 declare const builtinThemes: readonly [Theme, Theme];
 declare const clamp: (val: number, min?: number, max?: number) => number;
-declare const color2Shades: (hex: ColorHex, shadeLightenStep?: number, shadeDarkenStep?: number) => ColorShades;
-declare const paletteKeyShade2CSSVariable: (classPrefix: string, paletteKey: PaletteKeys, shade: string | number) => string;
+/**
+ * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
+ */
+declare const fillColorShades: (shades: ColorShades, shadeLightenStep?: number, shadeDarkenStep?: number) => ColorShadesComputed;
+declare const paletteKeyShade2CSSVariable: (classPrefix: string, paletteKey: string, shade: string | number) => string;
 declare const themeable: windicss_types_interfaces.PluginWithOptions<ThemeableOptions>;
 
-export { ColorHex, ColorShades, PaletteKeys, Theme, ThemePalette, ThemeableOptions, builtinThemes, clamp, color2Shades, paletteKeyShade2CSSVariable, shadeStops, themeDracula, themeMaterial, themeable };
+export { ColorHex, ColorShadeKeys, ColorShades, ColorShadesComputed, DEFAULT, PaletteKeys, ShadeStops, Theme, ThemePalette, ThemeableOptions, builtinPaletteKeys, builtinThemes, clamp, fillColorShades, paletteKeyShade2CSSVariable, shadeStops, themeDracula, themeMaterial, themeable };
