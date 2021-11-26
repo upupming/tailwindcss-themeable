@@ -10,6 +10,12 @@
   "less.validate": false,
   "stylelint.enable": true,
   "stylelint.validate": ["css", "less", "html", "vue"],
+  "editor.detectIndentation": false,
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
   // Use prettier to format files
   "editor.formatOnSave": true,
   // Since we use eslint to format js/ts files, so we have to disable prettier to avoid confilcts

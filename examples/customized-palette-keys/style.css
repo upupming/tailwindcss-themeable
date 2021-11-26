@@ -1,0 +1,5 @@
+.color-block {
+  @apply py-20 w-200
+    text-5xl flex items-center justify-center
+    border-themeable-foreground border-width-1px;
+}

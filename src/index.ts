@@ -6,31 +6,38 @@ import { ThemeType } from 'windicss/types/interfaces'
  * https://github.com/dracula/visual-studio-code/blob/d0b71bb57a591cdf11d43566831bb64c8899d783/src/dracula.yml#L9-L20
  * https://spec.draculatheme.com/#sec-Standard
  */
-export type PaletteKeys =
- 'background' | 'foreground' | 'selection' |
- 'comment' | 'cyan' | 'green' | 'orange' |
- 'pink' | 'purple' | 'red' | 'yellow'
+export const builtinPaletteKeys = ['background', 'foreground', 'selection',
+  'comment', 'cyan', 'green', 'orange',
+  'pink', 'purple', 'red', 'yellow'] as const
+export type PaletteKeys = typeof builtinPaletteKeys[number]
+
+/** The smaller the stop, the lighter the generated color */
+export const shadeStops = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const
+
+export type DEFAULT = 'DEFAULT'
+export type ShadeStops = typeof shadeStops[number]
+export type ColorShadeKeys = DEFAULT | ShadeStops
 
 export type ColorHex =`#${string}`
-export interface ColorShades {
-  '50': ColorHex
-  '100': ColorHex
-  '200': ColorHex
-  '300': ColorHex
-  '400': ColorHex
-  '500': ColorHex
-  '600': ColorHex
-  '700': ColorHex
-  '800': ColorHex
-  '900': ColorHex
-  DEFAULT: ColorHex
+export type ColorShades = {
+  [stop in ShadeStops]?: ColorHex
+} & {
+  [key in DEFAULT]: ColorHex
 }
-// The smaller the stop, the lighter the generated color
-export const shadeStops = [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+/**
+ * When all shades are already computed, type `ColorShades` will becomes `ColorShadesComputed`
+ */
+export type ColorShadesComputed = {
+  [key in ColorShadeKeys]: ColorHex
+}
 
 export type ThemePalette = {
   /** If the user only define one hex, then the hex will be used as `500` and `DEFAULT` shade, all other shades will be automatically calculated correspondingly */
-  [key in PaletteKeys]: ColorHex | ColorShades
+  [key in PaletteKeys]?: ColorHex | ColorShades
+} & {
+  /** User can define extra palette keys */
+  [key: string]: ColorHex | ColorShades
 }
 export interface Theme {
   name: string
@@ -110,25 +117,28 @@ export const clamp = (val: number, min: number = 0, max: number = 100) => {
   return Math.min(Math.max(val, min), max)
 }
 
-export const color2Shades = (hex: ColorHex, shadeLightenStep = 8, shadeDarkenStep = 11) => {
-  const [h, s, l] = converter.hex.hsl.raw(hex)
-  const defaultStop = 5
-  const generatedHexColors: ColorHex[] = shadeStops.map((stop) => {
-    const diff = (stop - defaultStop)
-    if (diff < 0) {
-      return (converter.hsl.hex([h, s, clamp(l + Math.abs(diff) * shadeLightenStep)]))
-    } else {
-      return (converter.hsl.hex([h, s, clamp(l - Math.abs(diff) * shadeDarkenStep)]))
-    }
-  }).map<ColorHex>(hex => `#${hex}`)
+/**
+ * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
+ */
+export const fillColorShades = (shades: ColorShades, shadeLightenStep = 8, shadeDarkenStep = 11) => {
+  const { DEFAULT } = shades
+  const [h, s, l] = converter.hex.hsl.raw(DEFAULT)
+  const defaultStop = 500
+  shadeStops.forEach((stop) => {
+    // if user already defined this shade, don't fill with auto generated value
+    if (shades[stop] !== undefined) return
 
-  const ans: any = {
-    DEFAULT: hex
-  }
-  shadeStops.forEach((stop, idx) => {
-    ans[stop * 100] = generatedHexColors[idx]
+    const diff = (stop - defaultStop) / 100
+    let hex: string
+    if (diff < 0) {
+      hex = (converter.hsl.hex([h, s, clamp(l + Math.abs(diff) * shadeLightenStep)]))
+    } else {
+      hex = '#' + (converter.hsl.hex([h, s, clamp(l - Math.abs(diff) * shadeDarkenStep)]))
+    }
+    shades[stop] = `#${hex}`
   })
-  return ans as ColorShades
+
+  return shades as ColorShadesComputed
 }
 
 const withOpacity = (variableName: string) => {
@@ -137,7 +147,7 @@ const withOpacity = (variableName: string) => {
   }
 }
 
-export const paletteKeyShade2CSSVariable = (classPrefix: string, paletteKey: PaletteKeys, shade: string | number) => `--${classPrefix}-${paletteKey}${shade === 'DEFAULT' ? '' : `-${shade}`}`
+export const paletteKeyShade2CSSVariable = (classPrefix: string, paletteKey: string, shade: string | number) => `--${classPrefix}-${paletteKey}${shade === 'DEFAULT' ? '' : `-${shade}`}`
 
 export const themeable = createPlugin.withOptions<ThemeableOptions>(({
   themes = [],
@@ -148,18 +158,19 @@ export const themeable = createPlugin.withOptions<ThemeableOptions>(({
 }) => ({ addBase }) => {
   themes = [...builtinThemes, ...themes]
   themes.forEach(theme => {
-    let paletteKey: PaletteKeys
-    for (paletteKey in theme.palette) {
+    for (const paletteKey in theme.palette) {
       const color = theme.palette[paletteKey]
       let colorShades: ColorShades
       if (typeof color === 'string') {
-        colorShades = color2Shades(color, shadeLightenStep, shadeDarkenStep)
+        colorShades = { DEFAULT: color }
       } else {
         colorShades = color
       }
-      for (const shade in colorShades) {
+      const colorShadesComputed = fillColorShades(colorShades, shadeLightenStep, shadeDarkenStep)
+      let shade: keyof ColorShades
+      for (shade in colorShadesComputed) {
         const key = paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade)
-        const value = converter.hex.rgb.raw(colorShades[shade as keyof ColorShades]).join(', ')
+        const value = converter.hex.rgb.raw(colorShadesComputed[shade]).join(', ')
         const rawRgbStyle = {
           [`.${classPrefix}-${theme.name}`]: {
             // --themeable-green-500: 'xxx'
@@ -177,26 +188,43 @@ export const themeable = createPlugin.withOptions<ThemeableOptions>(({
       }
     }
   })
-}, ({ classPrefix = 'themeable' }) => {
-  const { palette } = themeDracula
+}, ({ classPrefix = 'themeable', themes = [] }) => {
+  themes = [...builtinThemes, ...themes]
+
   const colors: ThemeType = {}
 
-  let paletteKey: PaletteKeys
-  for (paletteKey in palette) {
+  const paletteKeysSeen = new Set<string>()
+  themes.forEach(theme => {
+    for (const paletteKey in theme.palette) {
+      paletteKeysSeen.add(paletteKey)
+    }
+  })
+
+  for (const paletteKey of paletteKeysSeen) {
     const paletteInstance: any = {}
     for (const stop of shadeStops) {
-      const shade = stop * 100
-      paletteInstance[shade] = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade))
+      paletteInstance[stop] = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, stop))
     }
     paletteInstance.DEFAULT = withOpacity(paletteKeyShade2CSSVariable(classPrefix, paletteKey, 'DEFAULT'))
     colors[`${classPrefix}-${paletteKey}`] = paletteInstance
+
+    // Don't force user-defined themes to have the same palette keys as dracula
+    // @ts-expect-error
+    if (builtinPaletteKeys.includes(paletteKey)) continue
+    for (const theme of themes) {
+      // built-in theme does not need to follow the user-defined palette keys
+      if (builtinThemes.includes(theme)) continue
+      if (theme.palette[paletteKey] === undefined) {
+        console.warn(`[tailwindcss-themeable]: theme ${theme.name} missing the palette ${paletteKey}, please add the palette key to theme or delete the palette key from other themes to avoid inconsistent`)
+      }
+    }
   }
 
-  return ({
+  return {
     theme: {
       extend: {
         colors
       }
     }
-  })
+  }
 })

@@ -1,22 +1,30 @@
 # tailwindcss-themeable
 
+- [tailwindcss-themeable](#tailwindcss-themeable)
+    - [Demos](#demos)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Override auto-generated shade values](#override-auto-generated-shade-values)
+    - [Customized palette keys](#customized-palette-keys)
+    - [Full configurations](#full-configurations)
+    - [Reference](#reference)
+
 Adds multiple themes support for Tailwind CSS and Windi CSS.
 
-You can just develop your app with one theme and it will work with multiple themes palette colors, all you need is just to specify your default (for shade `500`) color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
+You can just develop your app with one theme and it will work with multiple themes color palettes, all you need is just to specify your default (for shade `500`) color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
 
-|Dracula (default theme)|Material|
-|-------|--------|
-|![dracula](img/dracula.png)|![material](img/material.png)|
+| Dracula (default theme)     | Material                      |
+| --------------------------- | ----------------------------- |
+| ![dracula](img/dracula.png) | ![material](img/material.png) |
 
-Demo Link:
+## Demos
 
-- Windi CSS: https://upupming.site/tailwindcss-themeable/windi/
-- Tailwind CSS: https://upupming.site/tailwindcss-themeable/tailwind/
-
-Demo source code:
-
-- [Windi CSS](examples/windi/index.html)
-- [Tailwind CSS](examples/tailwind/index.html)
+| Demo                    | Demo Link                                                            | Source Code                                                  |
+| ----------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Tailwind CSS            | https://upupming.site/tailwindcss-themeable/tailwind/                | [examples/tailwind](examples/tailwind)                       |
+| Windi CSS               | https://upupming.site/tailwindcss-themeable/windi/                   | [examples/windi](examples/windi)                             |
+| Override shades         | https://upupming.site/tailwindcss-themeable/override-shades/         | [examples/override-shades](examples/override-shades)         |
+| Customized palette keys | https://upupming.site/tailwindcss-themeable/customized-palette-keys/ | [examples/override-shades](examples/customized-palette-keys) |
 
 ## Installation
 
@@ -26,7 +34,7 @@ npm i -D tailwindcss-themeable
 
 ## Usage
 
-We define the color names following [the dracula contribute color palette](https://draculatheme.com/contribute).
+We define the color palette keys following [the dracula contribute color palette](https://draculatheme.com/contribute).
 
 CSS variables are generated from build time, and added to the corresponding scope for usage.
 
@@ -43,6 +51,7 @@ plugins: [
         {
           name: 'example-theme',
           palette: {
+            // color palette key: hex code
             background: '#282A36',
             foreground: '#F8F8F2',
             selection: '#44475A',
@@ -227,9 +236,13 @@ Compiled CSS:
 }
 ```
 
-<hr>
+## Override auto-generated shade values
 
-You can specify all the shades of a color if you want:
+As the [tailwindcss docs says](https://tailwindcss.com/docs/customizing-colors#generating-colors):
+
+> Bad news, color is complicated and despite trying dozens of different tools, we’ve yet to find one that does a good job generating these sorts of color palettes. We picked all of Tailwind’s default colors by hand, meticulously balancing them by eye and testing them in real designs to make sure we were happy with them.
+
+You can specify all (or just a part of) the shades of a color if you want, this will overwrite the auto-generated shade value. It will be super useful if you find the auto-generated not satisfying. Below is an example configuration, you can explore more on the [`override-shades`](examples/override-shades) example:
 
 ```js
 themeable({
@@ -257,7 +270,35 @@ themeable({
 })
 ```
 
-Extra configurations:
+## Customized palette keys
+
+You may find the dracula theme's palette key is not satisfying, and you may like some name convention such as `primary`, `secondary`, etc., just like [the material ui does](https://mui.com/customization/palette/). No problem, you can pass any key you want, but be cautious that you must define the `primary` key for all your themes to avoid the problem of missing a color when switching themes. The plugin will log a warning message if you forget some keys in a theme. Below is an example configuration, you can explore more on the [`customized-palette-keys`](examples/customized-palette-keys) example:
+
+```js
+themeable({
+      themes: [
+        {
+          name: 'theme-1',
+          palette: {
+            primary: '#42a5f5'
+            //...
+          }
+        },
+        {
+          name: 'theme-2',
+          palette: {
+            // make sure all your themes have your customized keys to avoid problems when switching themes
+            primary: '#fcba03'
+            //...
+          }
+        }
+      ]
+})
+```
+
+## Full configurations
+
+This is the type definition of this plugin, you can dive into the source code to see more, all the type definitions are well documented for your convenience. If you have any questions, please fell free to open an issue.
 
 ```ts
 interface ThemeableOptions {
