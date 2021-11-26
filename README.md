@@ -19,12 +19,12 @@ You can just develop your app with one theme and it will work with multiple them
 
 ## Demos
 
-| Demo                    | Demo Link                                                            | Source Code                                                  |
-| ----------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Tailwind CSS            | https://upupming.site/tailwindcss-themeable/tailwind/                | [examples/tailwind](examples/tailwind)                       |
-| Windi CSS               | https://upupming.site/tailwindcss-themeable/windi/                   | [examples/windi](examples/windi)                             |
-| Override shades         | https://upupming.site/tailwindcss-themeable/override-shades/         | [examples/override-shades](examples/override-shades)         |
-| Customized palette keys | https://upupming.site/tailwindcss-themeable/customized-palette-keys/ | [examples/override-shades](examples/customized-palette-keys) |
+| Demo                    | Demo Link                                                            | Source Code                                                          |
+| ----------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Tailwind CSS            | https://upupming.site/tailwindcss-themeable/tailwind/                | [examples/tailwind](examples/tailwind)                               |
+| Windi CSS               | https://upupming.site/tailwindcss-themeable/windi/                   | [examples/windi](examples/windi)                                     |
+| Override shades         | https://upupming.site/tailwindcss-themeable/override-shades/         | [examples/override-shades](examples/override-shades)                 |
+| Customized palette keys | https://upupming.site/tailwindcss-themeable/customized-palette-keys/ | [examples/customized-palette-keys](examples/customized-palette-keys) |
 
 ## Installation
 
@@ -298,7 +298,7 @@ themeable({
 
 ## Full configurations
 
-This is the type definition of this plugin, you can dive into the source code to see more, all the type definitions are well documented for your convenience. If you have any questions, please fell free to open an issue.
+This is the type definition of this plugin, you can dive into the source code to see more, all the type definitions are well documented for your convenience. If you have any questions, please fell free to open an issue. And new theme contribution is welcome!
 
 ```ts
 interface ThemeableOptions {
