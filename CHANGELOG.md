@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/upupming/tailwindcss-themeable/compare/v1.0.1...v1.1.0) (2021-11-26)
+
+
+### Features
+
+* support override shades and customized palette keys ([02385b0](https://github.com/upupming/tailwindcss-themeable/commit/02385b0cd85ebbfca303e575d14c1bc69a6dbf43))
+
 ### [1.0.1](https://github.com/upupming/tailwindcss-themeable/compare/v1.0.0...v1.0.1) (2021-11-25)
 
 
