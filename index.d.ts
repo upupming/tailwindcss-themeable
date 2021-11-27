@@ -6,6 +6,8 @@ import * as windicss_types_interfaces from 'windicss/types/interfaces';
  */
 declare const builtinPaletteKeys: readonly ["background", "foreground", "selection", "comment", "cyan", "green", "orange", "pink", "purple", "red", "yellow"];
 declare type PaletteKeys = typeof builtinPaletteKeys[number];
+declare const saturationFactorDefault = 1.771968374684816;
+declare const lightFactorDefault = 7.3903743315508015;
 /** The smaller the stop, the lighter the generated color */
 declare const shadeStops: readonly [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 declare type DEFAULT = 'DEFAULT';
@@ -45,36 +47,74 @@ interface ThemeableOptions {
      * @default `themeable`
      */
     classPrefix?: string;
-    /** The lighten step for auto generated shades smaller than the default `500` color
-     * For example, if you passed `#50FA7B` as the `green` theme key, and `shadeLightenStep` is 8,
-     * then we will use this color as the `DEFAULT` and shade `500` to generate all other shades of `green`,
-     * for shade smaller than `500`, we will add the lightness up `shadeLightenStep` in per 100 gap.
-     * Color `#50FA7B` converted to HSL is [135, 94, 64], so the shade `400` will be computed to [135, 94, 72]
-     * @default 8
-     */
-    shadeLightenStep?: number;
-    /** Similar with `shadeLightenStep` but for shades larger than `500`
-     * @default 11
-     */
-    shadeDarkenStep?: number;
     /** When not specify any theme in HTML, the `defaultTheme` will be used
      * @default `dracula`
      */
     defaultTheme?: string;
+    /**
+     * This will allow you the change the difference in saturation between each shade of color. By default we use  1.771968374684816 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+     */
+    saturationFactor?: number;
+    /**
+     * This will allow you the change the difference in lightness between each shade of color. By default we use 7.3903743315508015 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+     */
+    lightFactor?: number;
 }
 /**
  * The dracula theme, see https://github.com/dracula/visual-studio-code/blob/d0b71bb57a591cdf11d43566831bb64c8899d783/src/dracula.yml#L9-L20 and
  * https://draculatheme.com/contribute#color-palette
  */
-declare const themeDracula: Theme;
+declare const themeDracula: {
+    readonly name: "dracula";
+    readonly palette: {
+        readonly background: "#282A36";
+        readonly foreground: "#F8F8F2";
+        readonly selection: "#44475A";
+        readonly comment: "#6272A4";
+        readonly cyan: "#8BE9FD";
+        readonly green: "#50FA7B";
+        readonly orange: "#FFB86C";
+        readonly pink: "#FF79C6";
+        readonly purple: "#BD93F9";
+        readonly red: "#FF5555";
+        readonly yellow: "#F1FA8C";
+    };
+};
 declare const themeMaterial: Theme;
-declare const builtinThemes: readonly [Theme, Theme];
-declare const clamp: (val: number, min?: number, max?: number) => number;
+declare const builtinThemes: readonly [{
+    readonly name: "dracula";
+    readonly palette: {
+        readonly background: "#282A36";
+        readonly foreground: "#F8F8F2";
+        readonly selection: "#44475A";
+        readonly comment: "#6272A4";
+        readonly cyan: "#8BE9FD";
+        readonly green: "#50FA7B";
+        readonly orange: "#FFB86C";
+        readonly pink: "#FF79C6";
+        readonly purple: "#BD93F9";
+        readonly red: "#FF5555";
+        readonly yellow: "#F1FA8C";
+    };
+}, Theme];
 /**
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
  */
-declare const fillColorShades: (shades: ColorShades, shadeLightenStep?: number, shadeDarkenStep?: number) => ColorShadesComputed;
+declare const fillColorShades: (shades: ColorShades, saturationFactor?: number | undefined, lightFactor?: number | undefined) => ColorShadesComputed & {
+    50?: `#${string}` | undefined;
+    100?: `#${string}` | undefined;
+    200?: `#${string}` | undefined;
+    300?: `#${string}` | undefined;
+    400?: `#${string}` | undefined;
+    500?: `#${string}` | undefined;
+    600?: `#${string}` | undefined;
+    700?: `#${string}` | undefined;
+    800?: `#${string}` | undefined;
+    900?: `#${string}` | undefined;
+} & {
+    DEFAULT: `#${string}`;
+};
 declare const paletteKeyShade2CSSVariable: (classPrefix: string, paletteKey: string, shade: string | number) => string;
 declare const themeable: windicss_types_interfaces.PluginWithOptions<ThemeableOptions>;
 
-export { ColorHex, ColorShadeKeys, ColorShades, ColorShadesComputed, DEFAULT, PaletteKeys, ShadeStops, Theme, ThemePalette, ThemeableOptions, builtinPaletteKeys, builtinThemes, clamp, fillColorShades, paletteKeyShade2CSSVariable, shadeStops, themeDracula, themeMaterial, themeable };
+export { ColorHex, ColorShadeKeys, ColorShades, ColorShadesComputed, DEFAULT, PaletteKeys, ShadeStops, Theme, ThemePalette, ThemeableOptions, builtinPaletteKeys, builtinThemes, fillColorShades, lightFactorDefault, paletteKeyShade2CSSVariable, saturationFactorDefault, shadeStops, themeDracula, themeMaterial, themeable };

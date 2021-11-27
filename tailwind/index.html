@@ -11,8 +11,8 @@
       type="image/x-icon"
       href="https://draculatheme.com/static/img/favicon.ico"
     />
-    <script async type="module" crossorigin src="/tailwindcss-themeable/tailwind/assets/index.cc23c68d.js"></script>
-    <link rel="stylesheet" href="/tailwindcss-themeable/tailwind/assets/index.b23da06a.css">
+    <script async type="module" crossorigin src="./assets/index.cc23c68d.js"></script>
+    <link rel="stylesheet" href="./assets/index.35f990ba.css">
   </head>
 
   <body class="bg-themeable-background">
@@ -23,7 +23,9 @@
         top-0
         flex
         justify-between
-        bg-themeable-selection
+        bg-themeable-background
+        border-themeable-selection
+        shadow-lg shadow-themeable-foreground
         px-8
         py-4
         text-themeable-foreground
@@ -37,7 +39,7 @@
           <div class="dropdown block relative">
             <button
               class="
-                bg-themeable-cyan
+                bg-themeable-cyan-500
                 text-themeable-background
                 font-semibold
                 py-2
@@ -45,6 +47,7 @@
                 rounded
                 inline-flex
                 items-center
+                focus:outline-transparent
               "
             >
               <span class="mr-1">Theme</span>
@@ -112,8 +115,17 @@
       </ul>
     </nav>
 
-    <div class="m-8 space-y-4 mb-20 text-themeable-foreground">
-      <figure class="md:flex rounded-xl p-8 md:p-0 bg-themeable-selection">
+    <div class="m-16 space-y-16 mb-20 text-themeable-foreground">
+      <figure
+        class="
+          md:flex
+          rounded-xl
+          p-8
+          md:p-0
+          bg-themeable-selection
+          shadow-lg shadow-themeable-foreground
+        "
+      >
         <img
           class="
             w-32
@@ -131,12 +143,14 @@
         <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
           <blockquote>
             <p class="text-lg font-semibold">
-              Multiple themes support for tailwindcss. Developing with one theme
-              and it works with multiple themes, all you need is just to define
-              your default (for shade <code>500</code>) color values for your
-              theme. We will generate all shades from <code>50</code> to
-              <code>900</code> for you, following the built-in shade name
-              convention of the
+              Adds multiple themes support for Tailwind CSS and Windi CSS.
+            </p>
+            <p class="text-lg font-semibold">
+              You can just develop your app with one theme and it will work with
+              multiple themes color palettes, all you need is just to specify
+              your default color values for your theme pallette. We will
+              generate all shades from <code>50</code> to <code>900</code> for
+              you, following the built-in shade name convention of the
               <a
                 href="https://tailwindcss.com/docs/customizing-colors"
                 class="text-link"
@@ -145,8 +159,8 @@
             </p>
           </blockquote>
           <figcaption class="font-medium">
-            <div class="text-themeable-cyan-600">Yiming Li</div>
-            <div class="text-themeable-foreground-600">GitHub ID: upupming</div>
+            <div class="text-themeable-cyan-50">Author: Yiming Li</div>
+            <div class="text-themeable-foreground">GitHub ID: upupming</div>
           </figcaption>
         </div>
       </figure>
@@ -155,8 +169,8 @@
           relative
           z-10
           rounded-xl
-          shadow-lg
-          divide-y-2 divide-themeable-orange
+          shadow-lg shadow-themeable-foreground
+          divide-y-2 divide-themeable-orange-500
           flex flex-col
         "
       >
@@ -165,12 +179,13 @@
             class="
               flex-none
               w-48
-              bg-themeable-orange-200
+              border-themeable-orange-500 border-t-2 border-l-2
+              bg-themeable-orange-50
+              text-themeable-orange-500
               rounded-tl-xl
               text-lg
               leading-6
               font-semibold
-              text-themeable-orange
               px-4
               py-3
               p-8
@@ -195,10 +210,7 @@
               </dd>
             </div>
             <div class="space-y-1">
-              <dd
-                class="text-themeable-foreground-600 text-sm"
-                style="opacity: 1"
-              >
+              <dd class="text-themeable-foreground text-sm" style="opacity: 1">
                 We follow the
                 <a href="https://draculatheme.com/contribute" class="text-link"
                   >Dracula color palette definition</a
@@ -222,12 +234,13 @@
             class="
               flex-none
               w-48
-              bg-themeable-orange-200
+              bg-themeable-orange-50
+              text-themeable-orange-500
+              border-themeable-orange-500 border-b-2 border-l-2
               rounded-bl-xl
               text-lg
               leading-6
               font-semibold
-              text-themeable-orange
               px-4
               py-3
               p-8
@@ -242,11 +255,22 @@
               bg-themeable-selection
               rounded-br-xl
               overflow-hidden
-              text-themeable-foreground-600
+              text-themeable-foreground
             "
           >
-            <dl class="px-4 py-6 p-6 space-y-6">
-              <div class="space-y-2">
+            <dl
+              class="
+                px-4
+                py-6
+                p-6
+                grid
+                space-x-2 space-y-2
+                lg:grid-cols-2
+                xl:grid-cols-3
+                grid-cols-1
+              "
+            >
+              <div class="space-y-2 ml-2 mt-2">
                 <dt class="font-mono text-xs">
                   bg-themeable-background-{50-900}
                 </dt>
