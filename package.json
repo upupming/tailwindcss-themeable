@@ -43,7 +43,6 @@
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-angular": "^15.0.0",
     "@commitlint/prompt-cli": "^15.0.0",
-    "@types/color-convert": "^2.0.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -62,8 +61,5 @@
     "tsup": "^5.9.2",
     "typescript": "*",
     "windicss": "^3.2.1"
-  },
-  "dependencies": {
-    "color-convert": "^2.0.1"
   }
 }
