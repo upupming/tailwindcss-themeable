@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:watch": "jest --watch",
+    "test": "jest",
     "build": "tsup",
     "dev": "tsup --watch src",
     "prepare": "husky install"
@@ -37,10 +38,13 @@
   },
   "homepage": "https://github.com/upupming/tailwindcss-themeable#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@commitlint/cli": "^15.0.0",
     "@commitlint/config-angular": "^15.0.0",
     "@commitlint/prompt-cli": "^15.0.0",
     "@types/color-convert": "^2.0.0",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.10",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "^7.32.0",
@@ -49,10 +53,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "husky": "^7.0.4",
+    "jest": "^27.3.1",
     "lint-staged": "^12.1.2",
     "standard-version": "^9.3.2",
     "stylelint": "^14.1.0",
     "stylelint-config-standard": "^24.0.0",
+    "ts-jest": "^27.0.7",
     "tsup": "^5.9.2",
     "typescript": "*",
     "windicss": "^3.2.1"

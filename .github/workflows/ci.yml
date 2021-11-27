@@ -24,6 +24,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           pnpm i
+          pnpm test
           pnpm run build
           for d in examples/* ; do
               (cd "$d" && pnpm run build && cp -r dist/ ../../dist/"${d:9}" && cp -r dist/ ../../dist)

@@ -5,5 +5,5 @@ export default defineConfig({
   plugins: [
     WindiCSS()
   ],
-  base: '/tailwindcss-themeable/customized-palette-keys/'
+  base: './'
 })

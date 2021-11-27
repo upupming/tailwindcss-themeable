@@ -11,8 +11,8 @@
 }
 
 .text-link {
-  @apply text-themeable-cyan-700
-    hover:text-themeable-cyan-800
+  @apply text-themeable-orange-500
+    hover:text-themeable-orange-600
     transition;
 }
 

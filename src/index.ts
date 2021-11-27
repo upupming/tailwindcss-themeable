@@ -1,6 +1,7 @@
 import createPlugin from 'windicss/plugin'
-import converter from 'color-convert'
-import { ThemeType } from 'windicss/types/interfaces'
+import { colorOpacity, ThemeType } from 'windicss/types/interfaces'
+import { color2Shades } from './shades'
+import { hex2rgb } from './utils'
 
 /**
  * https://github.com/dracula/visual-studio-code/blob/d0b71bb57a591cdf11d43566831bb64c8899d783/src/dracula.yml#L9-L20
@@ -10,6 +11,9 @@ export const builtinPaletteKeys = ['background', 'foreground', 'selection',
   'comment', 'cyan', 'green', 'orange',
   'pink', 'purple', 'red', 'yellow'] as const
 export type PaletteKeys = typeof builtinPaletteKeys[number]
+
+export const saturationFactorDefault = 1.771968374684816
+export const lightFactorDefault = 7.3903743315508015
 
 /** The smaller the stop, the lighter the generated color */
 export const shadeStops = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as const
@@ -56,29 +60,25 @@ export interface ThemeableOptions {
    * @default `themeable`
    */
   classPrefix?: string
-  /** The lighten step for auto generated shades smaller than the default `500` color
-   * For example, if you passed `#50FA7B` as the `green` theme key, and `shadeLightenStep` is 8,
-   * then we will use this color as the `DEFAULT` and shade `500` to generate all other shades of `green`,
-   * for shade smaller than `500`, we will add the lightness up `shadeLightenStep` in per 100 gap.
-   * Color `#50FA7B` converted to HSL is [135, 94, 64], so the shade `400` will be computed to [135, 94, 72]
-   * @default 8
-   */
-  shadeLightenStep?: number
-  /** Similar with `shadeLightenStep` but for shades larger than `500`
-   * @default 11
-   */
-  shadeDarkenStep?: number
   /** When not specify any theme in HTML, the `defaultTheme` will be used
    * @default `dracula`
    */
   defaultTheme?: string
+  /**
+   * This will allow you the change the difference in saturation between each shade of color. By default we use  1.771968374684816 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+   */
+  saturationFactor?: number
+  /**
+   * This will allow you the change the difference in lightness between each shade of color. By default we use 7.3903743315508015 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+   */
+  lightFactor?: number
 }
 
 /**
  * The dracula theme, see https://github.com/dracula/visual-studio-code/blob/d0b71bb57a591cdf11d43566831bb64c8899d783/src/dracula.yml#L9-L20 and
  * https://draculatheme.com/contribute#color-palette
  */
-export const themeDracula: Theme = {
+export const themeDracula = {
   name: 'dracula',
   palette: {
     background: '#282A36',
@@ -93,7 +93,7 @@ export const themeDracula: Theme = {
     red: '#FF5555',
     yellow: '#F1FA8C'
   }
-}
+} as const
 export const themeMaterial: Theme = {
   name: 'material',
   palette: {
@@ -109,40 +109,42 @@ export const themeMaterial: Theme = {
     red: '#E53935',
     yellow: '#E2931D'
   }
-}
+} as const
 
 export const builtinThemes = [themeDracula, themeMaterial] as const
-
-export const clamp = (val: number, min: number = 0, max: number = 100) => {
-  return Math.min(Math.max(val, min), max)
-}
 
 /**
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
  */
-export const fillColorShades = (shades: ColorShades, shadeLightenStep = 8, shadeDarkenStep = 11) => {
+export const fillColorShades = (shades: ColorShades, saturationFactor?: number,
+  lightFactor?: number) => {
   const { DEFAULT } = shades
-  const [h, s, l] = converter.hex.hsl.raw(DEFAULT)
-  const defaultStop = 500
-  shadeStops.forEach((stop) => {
-    // if user already defined this shade, don't fill with auto generated value
-    if (shades[stop] !== undefined) return
-
-    const diff = (stop - defaultStop) / 100
-    let hex: string
-    if (diff < 0) {
-      hex = (converter.hsl.hex([h, s, clamp(l + Math.abs(diff) * shadeLightenStep)]))
-    } else {
-      hex = '#' + (converter.hsl.hex([h, s, clamp(l - Math.abs(diff) * shadeDarkenStep)]))
-    }
-    shades[stop] = `#${hex}`
-  })
-
-  return shades as ColorShadesComputed
+  const shadesComputed = color2Shades(DEFAULT, saturationFactor, lightFactor)
+  return Object.assign(shadesComputed, shades)
 }
 
 const withOpacity = (variableName: string) => {
-  return ({ opacityValue = 1 }) => {
+  return ({ opacityValue }: colorOpacity) => {
+    if (opacityValue == null) {
+      /**
+      input:
+      shadow-themeable-background-50
+      output:
+      .shadow-themeable-background-50 {
+        --tw-shadow-color: var(--themeable-background-50);
+      }
+       */
+      return `var(${variableName})`
+    }
+    /*
+    input:
+    text-themeable-foreground
+    output:
+    .text-themeable-foreground {
+      --tw-text-opacity: 1;
+      color: rgba(var(--themeable-foreground), var(--tw-text-opacity));
+    }
+    */
     return `rgba(var(${variableName}), ${opacityValue})`
   }
 }
@@ -151,10 +153,10 @@ export const paletteKeyShade2CSSVariable = (classPrefix: string, paletteKey: str
 
 export const themeable = createPlugin.withOptions<ThemeableOptions>(({
   themes = [],
-  shadeLightenStep = 8,
-  shadeDarkenStep = 11,
   classPrefix = 'themeable',
-  defaultTheme = 'dracula'
+  defaultTheme = 'dracula',
+  saturationFactor = saturationFactorDefault,
+  lightFactor = lightFactorDefault
 }) => ({ addBase }) => {
   themes = [...builtinThemes, ...themes]
   themes.forEach(theme => {
@@ -166,11 +168,11 @@ export const themeable = createPlugin.withOptions<ThemeableOptions>(({
       } else {
         colorShades = color
       }
-      const colorShadesComputed = fillColorShades(colorShades, shadeLightenStep, shadeDarkenStep)
+      const colorShadesComputed = fillColorShades(colorShades, saturationFactor, lightFactor)
       let shade: keyof ColorShades
       for (shade in colorShadesComputed) {
         const key = paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade)
-        const value = converter.hex.rgb.raw(colorShadesComputed[shade]).join(', ')
+        const value = hex2rgb(colorShadesComputed[shade]).join(', ')
         const rawRgbStyle = {
           [`.${classPrefix}-${theme.name}`]: {
             // --themeable-green-500: 'xxx'

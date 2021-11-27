@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils should convert hex to hsl correctly 1`] = `
+Array [
+  0,
+  100,
+  50,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 2`] = `
+Array [
+  0,
+  0,
+  100,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 3`] = `
+Array [
+  134.99999999999994,
+  100,
+  96.86274509803921,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 4`] = `
+Array [
+  135.55555555555557,
+  93.10344827586209,
+  88.62745098039215,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 5`] = `
+Array [
+  135.48387096774192,
+  93.93939393939395,
+  80.58823529411765,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 6`] = `
+Array [
+  135.1145038167939,
+  94.24460431654677,
+  72.74509803921568,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 7`] = `
+Array [
+  135.1764705882353,
+  94.44444444444446,
+  64.70588235294117,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 8`] = `
+Array [
+  135.33632286995515,
+  94.09282700421942,
+  53.529411764705884,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 9`] = `
+Array [
+  135.14563106796115,
+  94.49541284403668,
+  42.74509803921569,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 10`] = `
+Array [
+  135.2941176470588,
+  95.03105590062113,
+  31.56862745098039,
+]
+`;
+
+exports[`utils should convert hex to hsl correctly 11`] = `
+Array [
+  135,
+  94.33962264150942,
+  20.784313725490197,
+]
+`;

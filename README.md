@@ -7,11 +7,12 @@
     - [Override auto-generated shade values](#override-auto-generated-shade-values)
     - [Customized palette keys](#customized-palette-keys)
     - [Full configurations](#full-configurations)
-    - [Reference](#reference)
+    - [About shades generating algorithm](#about-shades-generating-algorithm)
+    - [Credits](#credits)
 
 Adds multiple themes support for Tailwind CSS and Windi CSS.
 
-You can just develop your app with one theme and it will work with multiple themes color palettes, all you need is just to specify your default (for shade `500`) color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
+You can just develop your app with one theme and it will work with multiple themes color palettes, all you need is just to specify your default color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
 
 | Dracula (default theme)     | Material                      |
 | --------------------------- | ----------------------------- |
@@ -242,7 +243,7 @@ As the [tailwindcss docs says](https://tailwindcss.com/docs/customizing-colors#g
 
 > Bad news, color is complicated and despite trying dozens of different tools, we’ve yet to find one that does a good job generating these sorts of color palettes. We picked all of Tailwind’s default colors by hand, meticulously balancing them by eye and testing them in real designs to make sure we were happy with them.
 
-You can specify all (or just a part of) the shades of a color if you want, this will overwrite the auto-generated shade value. It will be super useful if you find the auto-generated not satisfying. Below is an example configuration, you can explore more on the [`override-shades`](examples/override-shades) example:
+Although our shade generating algorithm is okay in most cases, you may still find the auto-generated shades not satisfying. You can specify all (or just a part of) the shades of a color if you want, this will overwrite the auto-generated shade value. Below is an example configuration, you can explore more on the [`override-shades`](examples/override-shades) example:
 
 ```js
 themeable({
@@ -301,39 +302,42 @@ themeable({
 This is the type definition of this plugin, you can dive into the source code to see more, all the type definitions are well documented for your convenience. If you have any questions, please fell free to open an issue. And new theme contribution is welcome!
 
 ```ts
-interface ThemeableOptions {
-    /**
-     * Support a list of theme definitions, the user should define the colors of the theme follow the contribute of Dracula theme.
-     * See https://draculatheme.com/contribute#color-palette
-     * @default []
-     */
-    themes?: Theme[];
-    /**
-     * Prefix of the class to enable a theme, for example the container with class `${classPrefix}-dracula` will enable dracula theme in its children elements
-     * @default `themeable`
-     */
-    classPrefix?: string;
-    /** The lighten step for auto generated shades smaller than the default `500` color
-     * For example, if you passed `#50FA7B` as the `green` theme key, and `shadeLightenStep` is 8,
-     * then we will use this color as the `DEFAULT` and shade `500` to generate all other shades of `green`,
-     * for shade smaller than `500`, we will add the lightness up `shadeLightenStep` in per 100 gap.
-     * Color `#50FA7B` converted to HSL is [135, 94, 64], so the shade `400` will be computed to [135, 94, 72]
-     * @default 8
-     */
-    shadeLightenStep?: number;
-    /** Similar with `shadeLightenStep` but for shades larger than `500`
-     * @default 11
-     */
-    shadeDarkenStep?: number;
-    /** When not specify any theme in HTML, the `defaultTheme` will be used
-     * @default `dracula`
-     */
-    defaultTheme?: string;
+export interface ThemeableOptions {
+  /**
+   * Support a list of theme definitions, the user should define the colors of the theme follow the contribute of Dracula theme.
+   * See https://draculatheme.com/contribute#color-palette
+   * @default []
+   */
+  themes?: Theme[]
+  /**
+   * Prefix of the class to enable a theme, for example the container with class `${classPrefix}-dracula` will enable dracula theme in its children elements
+   * @default `themeable`
+   */
+  classPrefix?: string
+  /** When not specify any theme in HTML, the `defaultTheme` will be used
+   * @default `dracula`
+   */
+  defaultTheme?: string
+  /**
+   * This will allow you the change the difference in saturation between each shade of color. By default we use  1.771968374684816 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+   */
+  saturationFactor?: number
+  /**
+   * This will allow you the change the difference in lightness between each shade of color. By default we use 7.3903743315508015 because these are the averages that steps change in tailwind's default colors. Thanks to https://tw-shade-gen.netlify.app/
+   */
+  lightFactor?: number
 }
 ```
 
-## Reference
+## About shades generating algorithm
 
-1. https://github.com/dracula/tailwind
-2. https://github.com/anheric/tailwindshades
-3. [Theming Tailwind with CSS Variables](https://www.youtube.com/watch?v=MAtaT8BZEAo)
+The shades generating algorithm will find a best shade number (`50`-`900`) for your color, and then generate darker and lighter shades with fixed saturation and lightness step (`saturationFactor` and `lightFactor`).
+
+## Credits
+
+1. Idea of shades generation
+    1. https://github.com/dracula/tailwind
+    2. https://github.com/nickgraffis/tailwind-color-generator
+    3. https://github.com/anheric/tailwindshades
+2. Idea of theming
+    1. [Theming Tailwind with CSS Variables](https://www.youtube.com/watch?v=MAtaT8BZEAo)
