@@ -8,7 +8,7 @@ export const hex2rgb = (hex: ColorHex): [number, number, number] => {
   let r, g, b
   if (hex.length === 4) {
     // #RGB
-    [r, g, b] = hex.split('').slice(1).map(s => parseInt(s + s, 16) / 255)
+    [r, g, b] = hex.split('').slice(1).map(s => parseInt(s + s, 16))
   } else {
     // #RRGGBB
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
