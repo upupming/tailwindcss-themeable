@@ -14,9 +14,7 @@ Adds multiple themes support for Tailwind CSS and Windi CSS.
 
 You can just develop your app with one theme and it will work with multiple themes color palettes, all you need is just to specify your default color values for your theme pallette. We will generate all shades from `50` to `900` for you, following the built-in shade name convention of the [default color values](https://tailwindcss.com/docs/customizing-colors).
 
-| Dracula (default theme)     | Material                      |
-| --------------------------- | ----------------------------- |
-| ![dracula](img/dracula.png) | ![material](img/material.png) |
+![dracula_vs_material](img/dracula_vs_material.png)
 
 ## Demos
 
