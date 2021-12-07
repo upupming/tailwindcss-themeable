@@ -1,5 +1,8 @@
 # tailwindcss-themeable
 
+![npm (tag)](https://img.shields.io/npm/v/tailwindcss-themeable/latest?style=flat-square)
+![npm](https://img.shields.io/npm/dm/tailwindcss-themeable?style=flat-square)
+
 - [tailwindcss-themeable](#tailwindcss-themeable)
     - [Demos](#demos)
     - [Installation](#installation)
@@ -18,12 +21,13 @@ You can just develop your app with one theme and it will work with multiple them
 
 ## Demos
 
-| Demo                    | Demo Link                                                            | Source Code                                                          |
-| ----------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Tailwind CSS            | https://upupming.site/tailwindcss-themeable/tailwind/                | [examples/tailwind](examples/tailwind)                               |
-| Windi CSS               | https://upupming.site/tailwindcss-themeable/windi/                   | [examples/windi](examples/windi)                                     |
-| Override shades         | https://upupming.site/tailwindcss-themeable/override-shades/         | [examples/override-shades](examples/override-shades)                 |
-| Customized palette keys | https://upupming.site/tailwindcss-themeable/customized-palette-keys/ | [examples/customized-palette-keys](examples/customized-palette-keys) |
+| Demo                                 | Demo Link                                                                             | Source Code                                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Tailwind CSS                         | https://upupming.site/tailwindcss-themeable/tailwind/                                 | [examples/tailwind](examples/tailwind)                                                    |
+| Windi CSS                            | https://upupming.site/tailwindcss-themeable/windi/                                    | [examples/windi](examples/windi)                                                          |
+| Override shades                      | https://upupming.site/tailwindcss-themeable/override-shades/                          | [examples/override-shades](examples/override-shades)                                      |
+| Customized palette keys              | https://upupming.site/tailwindcss-themeable/customized-palette-keys/                  | [examples/customized-palette-keys](examples/customized-palette-keys)                      |
+| vue3-compact-template themed example | https://upupming.site/vue3-compact-template/storybook/?path=/story/components--themed | https://github.com/upupming/vue3-compact-template/blob/main/src/stories/ThemedExample.vue |
 
 ## Installation
 

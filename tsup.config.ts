@@ -10,7 +10,8 @@ const options: Options = {
   dts: true,
   entryPoints: [
     'src/index.ts'
-  ]
+  ],
+  minify: true
 }
 
 export default options
