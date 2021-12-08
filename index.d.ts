@@ -90,24 +90,24 @@ declare const themeDracula: {
     };
     readonly isDark: true;
 };
-declare const themeMaterial: Theme;
-declare const builtinThemes: readonly [{
-    readonly name: "dracula";
+declare const themeMaterial: {
+    readonly name: "material";
     readonly palette: {
-        readonly background: "#282A36";
-        readonly foreground: "#F8F8F2";
-        readonly selection: "#44475A";
-        readonly comment: "#6272A4";
-        readonly cyan: "#8BE9FD";
-        readonly green: "#50FA7B";
-        readonly orange: "#FFB86C";
-        readonly pink: "#FF79C6";
-        readonly purple: "#BD93F9";
-        readonly red: "#FF5555";
-        readonly yellow: "#F1FA8C";
+        readonly background: "#FFFFFF";
+        readonly foreground: "#000000";
+        readonly selection: "#8796B0";
+        readonly comment: "#6182B8";
+        readonly cyan: "#39ADB5";
+        readonly green: "#91B859";
+        readonly orange: "#F76D47";
+        readonly pink: "#FF5370";
+        readonly purple: "#9C3EDA";
+        readonly red: "#E53935";
+        readonly yellow: "#E2931D";
     };
-    readonly isDark: true;
-}, Theme];
+    readonly isDark: false;
+};
+declare const builtinThemes: Theme[];
 /**
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
  */
