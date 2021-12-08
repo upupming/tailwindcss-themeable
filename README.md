@@ -1,6 +1,6 @@
 # tailwindcss-themeable
 
-![npm (tag)](https://img.shields.io/npm/v/tailwindcss-themeable/latest?style=flat-square)
+[![npm (tag)](https://img.shields.io/npm/v/tailwindcss-themeable/latest?style=flat-square)](https://www.npmjs.com/package/tailwindcss-themeable)
 ![npm](https://img.shields.io/npm/dm/tailwindcss-themeable?style=flat-square)
 
 - [tailwindcss-themeable](#tailwindcss-themeable)
