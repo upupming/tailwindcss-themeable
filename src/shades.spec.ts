@@ -1,10 +1,13 @@
 import { color2Shades } from './shades'
-import { themeDracula } from '.'
+import { themeDracula, themeMaterial } from '.'
 
 describe('shades', () => {
   it('should generate shades from color correctly', () => {
-    for (const color of Object.values(themeDracula.palette)) {
-      expect(color2Shades(color)).toMatchSnapshot()
+    for (const [name, color] of Object.entries(themeDracula.palette)) {
+      expect(color2Shades(color, undefined, undefined, themeDracula.isDark)).toMatchSnapshot(`dracula ${name}`)
+    }
+    for (const [name, color] of Object.entries(themeMaterial.palette)) {
+      expect(color2Shades(color, undefined, undefined, themeMaterial.isDark)).toMatchSnapshot(`material ${name}`)
     }
   })
 })

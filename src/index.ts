@@ -104,7 +104,7 @@ export const themeDracula = {
   },
   isDark: true
 } as const
-export const themeMaterial: Theme = {
+export const themeMaterial = {
   name: 'material',
   palette: {
     background: '#FFFFFF',
@@ -118,10 +118,11 @@ export const themeMaterial: Theme = {
     purple: '#9C3EDA',
     red: '#E53935',
     yellow: '#E2931D'
-  }
+  },
+  isDark: false
 } as const
 
-export const builtinThemes = [themeDracula, themeMaterial] as const
+export const builtinThemes: Theme[] = [themeDracula, themeMaterial]
 
 /**
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`

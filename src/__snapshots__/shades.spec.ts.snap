@@ -1,177 +1,353 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`shades should generate shades from color correctly 1`] = `
+exports[`shades should generate shades from color correctly: dracula background 1`] = `
 Object {
-  "100": "#b5bad6",
-  "200": "#9ea4c8",
-  "300": "#888fb8",
-  "400": "#727aa8",
-  "50": "#cdd0e4",
-  "500": "#5f6795",
-  "600": "#53597c",
-  "700": "#454a64",
-  "800": "#373a4d",
-  "900": "#282a36",
+  "100": "#373a4d",
+  "200": "#454a64",
+  "300": "#53597c",
+  "400": "#5f6795",
+  "50": "#282a36",
+  "500": "#727aa8",
+  "600": "#888fb8",
+  "700": "#9ea4c8",
+  "800": "#b5bad6",
+  "900": "#cdd0e4",
   "DEFAULT": "#282A36",
 }
 `;
 
-exports[`shades should generate shades from color correctly 2`] = `
+exports[`shades should generate shades from color correctly: dracula comment 1`] = `
 Object {
-  "100": "#eaeada",
-  "200": "#dcdcc3",
-  "300": "#cdcdac",
-  "400": "#bdbd96",
-  "50": "#f8f8f2",
-  "500": "#adad81",
-  "600": "#9c9c6c",
-  "700": "#85855d",
-  "800": "#6d6d4f",
-  "900": "#565641",
-  "DEFAULT": "#F8F8F2",
-}
-`;
-
-exports[`shades should generate shades from color correctly 3`] = `
-Object {
-  "100": "#dfe1ed",
-  "200": "#c7cadf",
-  "300": "#b1b5d0",
-  "400": "#9ba0c0",
-  "50": "#f7f7fb",
-  "500": "#858bb0",
-  "600": "#71779f",
-  "700": "#606689",
-  "800": "#525771",
-  "900": "#44475a",
-  "DEFAULT": "#44475A",
-}
-`;
-
-exports[`shades should generate shades from color correctly 4`] = `
-Object {
-  "100": "#d7dcec",
-  "200": "#bec6df",
-  "300": "#a6b0d1",
-  "400": "#8f9bc3",
-  "50": "#f0f2f8",
-  "500": "#7886b4",
-  "600": "#6272a4",
-  "700": "#54628c",
-  "800": "#485273",
-  "900": "#3b425a",
+  "100": "#485273",
+  "200": "#54628c",
+  "300": "#6272a4",
+  "400": "#7886b4",
+  "50": "#3b425a",
+  "500": "#8f9bc3",
+  "600": "#a6b0d1",
+  "700": "#bec6df",
+  "800": "#d7dcec",
+  "900": "#f0f2f8",
   "DEFAULT": "#6272A4",
 }
 `;
 
-exports[`shades should generate shades from color correctly 5`] = `
+exports[`shades should generate shades from color correctly: dracula cyan 1`] = `
 Object {
-  "100": "#d4f8ff",
-  "200": "#aff0fe",
-  "300": "#8be9fd",
-  "400": "#67e1fb",
-  "50": "#fafeff",
-  "500": "#44d9f8",
-  "600": "#22d0f5",
-  "700": "#0dbfe5",
-  "800": "#0ca0bf",
-  "900": "#0c819a",
+  "100": "#0ca0bf",
+  "200": "#0dbfe5",
+  "300": "#22d0f5",
+  "400": "#44d9f8",
+  "50": "#0c819a",
+  "500": "#67e1fb",
+  "600": "#8be9fd",
+  "700": "#aff0fe",
+  "800": "#d4f8ff",
+  "900": "#fafeff",
   "DEFAULT": "#8BE9FD",
 }
 `;
 
-exports[`shades should generate shades from color correctly 6`] = `
+exports[`shades should generate shades from color correctly: dracula foreground 1`] = `
 Object {
-  "100": "#bcffcd",
-  "200": "#97feb1",
-  "300": "#73fc96",
-  "400": "#50fa7b",
-  "50": "#e2ffe9",
-  "500": "#2df760",
-  "600": "#0cf346",
-  "700": "#0ccd3d",
-  "800": "#0ba833",
-  "900": "#0a8329",
+  "100": "#6d6d4f",
+  "200": "#85855d",
+  "300": "#9c9c6c",
+  "400": "#adad81",
+  "50": "#565641",
+  "500": "#bdbd96",
+  "600": "#cdcdac",
+  "700": "#dcdcc3",
+  "800": "#eaeada",
+  "900": "#f8f8f2",
+  "DEFAULT": "#F8F8F2",
+}
+`;
+
+exports[`shades should generate shades from color correctly: dracula green 1`] = `
+Object {
+  "100": "#0ba833",
+  "200": "#0ccd3d",
+  "300": "#0cf346",
+  "400": "#2df760",
+  "50": "#0a8329",
+  "500": "#50fa7b",
+  "600": "#73fc96",
+  "700": "#97feb1",
+  "800": "#bcffcd",
+  "900": "#e2ffe9",
   "DEFAULT": "#50FA7B",
 }
 `;
 
-exports[`shades should generate shades from color correctly 7`] = `
+exports[`shades should generate shades from color correctly: dracula orange 1`] = `
 Object {
-  "100": "#ffdcb7",
-  "200": "#ffca92",
-  "300": "#ffb86c",
-  "400": "#fda648",
-  "50": "#ffefdd",
-  "500": "#fb9325",
-  "600": "#f38107",
-  "700": "#cd6d08",
-  "800": "#a75a08",
-  "900": "#824707",
+  "100": "#a75a08",
+  "200": "#cd6d08",
+  "300": "#f38107",
+  "400": "#fb9325",
+  "50": "#824707",
+  "500": "#fda648",
+  "600": "#ffb86c",
+  "700": "#ffca92",
+  "800": "#ffdcb7",
+  "900": "#ffefdd",
   "DEFAULT": "#FFB86C",
 }
 `;
 
-exports[`shades should generate shades from color correctly 8`] = `
+exports[`shades should generate shades from color correctly: dracula pink 1`] = `
 Object {
-  "100": "#ffc4e6",
-  "200": "#ff9fd6",
-  "300": "#ff79c6",
-  "400": "#fd55b6",
-  "50": "#ffeaf6",
-  "500": "#fb31a5",
-  "600": "#f80e95",
-  "700": "#d90880",
-  "800": "#b3086b",
-  "900": "#8e0855",
+  "100": "#b3086b",
+  "200": "#d90880",
+  "300": "#f80e95",
+  "400": "#fb31a5",
+  "50": "#8e0855",
+  "500": "#fd55b6",
+  "600": "#ff79c6",
+  "700": "#ff9fd6",
+  "800": "#ffc4e6",
+  "900": "#ffeaf6",
   "DEFAULT": "#FF79C6",
 }
 `;
 
-exports[`shades should generate shades from color correctly 9`] = `
+exports[`shades should generate shades from color correctly: dracula purple 1`] = `
 Object {
-  "100": "#e9dafe",
-  "200": "#d3b6fc",
-  "300": "#bd93f9",
-  "400": "#a771f6",
-  "50": "#fefeff",
-  "500": "#924ff2",
-  "600": "#7d2eed",
-  "700": "#6916e0",
-  "800": "#5914bb",
-  "900": "#491298",
+  "100": "#5914bb",
+  "200": "#6916e0",
+  "300": "#7d2eed",
+  "400": "#924ff2",
+  "50": "#491298",
+  "500": "#a771f6",
+  "600": "#bd93f9",
+  "700": "#d3b6fc",
+  "800": "#e9dafe",
+  "900": "#fefeff",
   "DEFAULT": "#BD93F9",
 }
 `;
 
-exports[`shades should generate shades from color correctly 10`] = `
+exports[`shades should generate shades from color correctly: dracula red 1`] = `
 Object {
-  "100": "#ffc6c6",
-  "200": "#ffa0a0",
-  "300": "#ff7b7b",
-  "400": "#ff5555",
-  "50": "#ffecec",
-  "500": "#fd3131",
-  "600": "#fb0e0e",
-  "700": "#dd0606",
-  "800": "#b70707",
-  "900": "#910707",
+  "100": "#b70707",
+  "200": "#dd0606",
+  "300": "#fb0e0e",
+  "400": "#fd3131",
+  "50": "#910707",
+  "500": "#ff5555",
+  "600": "#ff7b7b",
+  "700": "#ffa0a0",
+  "800": "#ffc6c6",
+  "900": "#ffecec",
   "DEFAULT": "#FF5555",
 }
 `;
 
-exports[`shades should generate shades from color correctly 11`] = `
+exports[`shades should generate shades from color correctly: dracula selection 1`] = `
 Object {
-  "100": "#fafed3",
-  "200": "#f6fcaf",
-  "300": "#f1fa8c",
-  "400": "#ebf769",
-  "50": "#fefff8",
-  "500": "#e5f347",
-  "600": "#dfef26",
-  "700": "#ccdd12",
-  "800": "#abb811",
-  "900": "#899410",
+  "100": "#525771",
+  "200": "#606689",
+  "300": "#71779f",
+  "400": "#858bb0",
+  "50": "#44475a",
+  "500": "#9ba0c0",
+  "600": "#b1b5d0",
+  "700": "#c7cadf",
+  "800": "#dfe1ed",
+  "900": "#f7f7fb",
+  "DEFAULT": "#44475A",
+}
+`;
+
+exports[`shades should generate shades from color correctly: dracula yellow 1`] = `
+Object {
+  "100": "#abb811",
+  "200": "#ccdd12",
+  "300": "#dfef26",
+  "400": "#e5f347",
+  "50": "#899410",
+  "500": "#ebf769",
+  "600": "#f1fa8c",
+  "700": "#f6fcaf",
+  "800": "#fafed3",
+  "900": "#fefff8",
   "DEFAULT": "#F1FA8C",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material background 1`] = `
+Object {
+  "100": "#ececec",
+  "200": "#d9d9d9",
+  "300": "#c6c6c6",
+  "400": "#b4b4b4",
+  "50": "#ffffff",
+  "500": "#a1a1a1",
+  "600": "#8e8e8e",
+  "700": "#7b7b7b",
+  "800": "#686868",
+  "900": "#555555",
+  "DEFAULT": "#FFFFFF",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material comment 1`] = `
+Object {
+  "100": "#e1e8f4",
+  "200": "#c6d4ea",
+  "300": "#acbfde",
+  "400": "#92aad2",
+  "50": "#fdfdfe",
+  "500": "#7996c5",
+  "600": "#6182b8",
+  "700": "#4e6fa6",
+  "800": "#435e8a",
+  "900": "#394d6f",
+  "DEFAULT": "#6182B8",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material cyan 1`] = `
+Object {
+  "100": "#daf5f6",
+  "200": "#bcebef",
+  "300": "#9fe2e6",
+  "400": "#82d7dd",
+  "50": "#f8fdfe",
+  "500": "#66ccd3",
+  "600": "#4bc1c9",
+  "700": "#39adb5",
+  "800": "#329097",
+  "900": "#2a7479",
+  "DEFAULT": "#39ADB5",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material foreground 1`] = `
+Object {
+  "100": "#a68888",
+  "200": "#937575",
+  "300": "#7d6565",
+  "400": "#675656",
+  "50": "#b79c9c",
+  "500": "#514646",
+  "600": "#3c3636",
+  "700": "#272424",
+  "800": "#131313",
+  "900": "#000000",
+  "DEFAULT": "#000000",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material green 1`] = `
+Object {
+  "100": "#e9f3db",
+  "200": "#d8e8c0",
+  "300": "#c6dda5",
+  "400": "#b4d18b",
+  "50": "#fafcf7",
+  "500": "#a3c572",
+  "600": "#91b859",
+  "700": "#7ea349",
+  "800": "#69873f",
+  "900": "#556c34",
+  "DEFAULT": "#91B859",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material orange 1`] = `
+Object {
+  "100": "#ffdfd6",
+  "200": "#fec2b1",
+  "300": "#fca58d",
+  "400": "#fa896a",
+  "50": "#fffcfb",
+  "500": "#f76d47",
+  "600": "#f35125",
+  "700": "#e43d0e",
+  "800": "#bf340e",
+  "900": "#9a2b0d",
+  "DEFAULT": "#F76D47",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material pink 1`] = `
+Object {
+  "100": "#ffc4ce",
+  "200": "#ff9eaf",
+  "300": "#ff798f",
+  "400": "#ff5370",
+  "50": "#ffeaed",
+  "500": "#fd2f52",
+  "600": "#fb0c34",
+  "700": "#db062a",
+  "800": "#b50724",
+  "900": "#8f071e",
+  "DEFAULT": "#FF5370",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material purple 1`] = `
+Object {
+  "100": "#eddafa",
+  "200": "#ddbaf5",
+  "300": "#cd9aef",
+  "400": "#bd7be9",
+  "50": "#fdfcff",
+  "500": "#ad5ce2",
+  "600": "#9c3eda",
+  "700": "#8a29c9",
+  "800": "#7425a8",
+  "900": "#5e1f88",
+  "DEFAULT": "#9C3EDA",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material red 1`] = `
+Object {
+  "100": "#fcdbda",
+  "200": "#f9b9b8",
+  "300": "#f59896",
+  "400": "#f07875",
+  "50": "#fffdfd",
+  "500": "#eb5855",
+  "600": "#e53935",
+  "700": "#d6221e",
+  "800": "#b31f1b",
+  "900": "#911b18",
+  "DEFAULT": "#E53935",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material selection 1`] = `
+Object {
+  "100": "#e0e5ee",
+  "200": "#c9d1df",
+  "300": "#b2bdd0",
+  "400": "#9caac0",
+  "50": "#f8f9fb",
+  "500": "#8796b0",
+  "600": "#72839f",
+  "700": "#62708a",
+  "800": "#545f72",
+  "900": "#454d5b",
+  "DEFAULT": "#8796B0",
+}
+`;
+
+exports[`shades should generate shades from color correctly: material yellow 1`] = `
+Object {
+  "100": "#fae3c1",
+  "200": "#f7d49f",
+  "300": "#f3c47d",
+  "400": "#eeb45d",
+  "50": "#fdf3e4",
+  "500": "#e8a33c",
+  "600": "#e2931d",
+  "700": "#bf7d1b",
+  "800": "#9c6718",
+  "900": "#7a5114",
+  "DEFAULT": "#E2931D",
 }
 `;
