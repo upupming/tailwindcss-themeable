@@ -34,6 +34,15 @@ declare type ThemePalette = {
 interface Theme {
     name: string;
     palette: ThemePalette;
+    /** Whether this theme is a dark theme or not,
+     * if it is light theme, shades will get darker from 50 to 900, just like the tailwind official shades
+     * if it is dark theme, shades will get lighter from 50 to 900
+     * the reason why we reverse the shades for dark theme is that we want to keep contrast with background
+     * for example, a light theme often has white background and black foreground, foreground-900 (the most dark black) will have the largest contrast with background-50 (the most light white)
+     * when we switching to a dark theme which often has black background and white foreground, foreground-900 (the most light white) will still have the largest contrast with background-50 (the most dark black)
+     * @default false
+     */
+    isDark?: boolean;
 }
 interface ThemeableOptions {
     /**
@@ -79,6 +88,7 @@ declare const themeDracula: {
         readonly red: "#FF5555";
         readonly yellow: "#F1FA8C";
     };
+    readonly isDark: true;
 };
 declare const themeMaterial: Theme;
 declare const builtinThemes: readonly [{
@@ -96,11 +106,12 @@ declare const builtinThemes: readonly [{
         readonly red: "#FF5555";
         readonly yellow: "#F1FA8C";
     };
+    readonly isDark: true;
 }, Theme];
 /**
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
  */
-declare const fillColorShades: (shades: ColorShades, saturationFactor?: number | undefined, lightFactor?: number | undefined) => ColorShadesComputed & {
+declare const fillColorShades: (shades: ColorShades, saturationFactor?: number | undefined, lightFactor?: number | undefined, isDark?: boolean | undefined) => ColorShadesComputed & {
     50?: `#${string}` | undefined;
     100?: `#${string}` | undefined;
     200?: `#${string}` | undefined;
