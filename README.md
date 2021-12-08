@@ -67,7 +67,8 @@ plugins: [
             red: '#FF5555',
             yellow: '#F1FA8C'
           }
-        }
+        },
+        isDark: true
       ]
     })
   ]

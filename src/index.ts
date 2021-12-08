@@ -46,6 +46,15 @@ export type ThemePalette = {
 export interface Theme {
   name: string
   palette: ThemePalette
+  /** Whether this theme is a dark theme or not,
+   * if it is light theme, shades will get darker from 50 to 900, just like the tailwind official shades
+   * if it is dark theme, shades will get lighter from 50 to 900
+   * the reason why we reverse the shades for dark theme is that we want to keep contrast with background
+   * for example, a light theme often has white background and black foreground, foreground-900 (the most dark black) will have the largest contrast with background-50 (the most light white)
+   * when we switching to a dark theme which often has black background and white foreground, foreground-900 (the most light white) will still have the largest contrast with background-50 (the most dark black)
+   * @default false
+   */
+  isDark?: boolean
 }
 
 export interface ThemeableOptions {
@@ -92,7 +101,8 @@ export const themeDracula = {
     purple: '#BD93F9',
     red: '#FF5555',
     yellow: '#F1FA8C'
-  }
+  },
+  isDark: true
 } as const
 export const themeMaterial: Theme = {
   name: 'material',
@@ -117,9 +127,9 @@ export const builtinThemes = [themeDracula, themeMaterial] as const
  * Fill a `ColorShades` with auto-generated shade values and return a `ColorShadesComputed`
  */
 export const fillColorShades = (shades: ColorShades, saturationFactor?: number,
-  lightFactor?: number) => {
+  lightFactor?: number, isDark?: boolean) => {
   const { DEFAULT } = shades
-  const shadesComputed = color2Shades(DEFAULT, saturationFactor, lightFactor)
+  const shadesComputed = color2Shades(DEFAULT, saturationFactor, lightFactor, isDark)
   return Object.assign(shadesComputed, shades)
 }
 
@@ -168,7 +178,7 @@ export const themeable = createPlugin.withOptions<ThemeableOptions>(({
       } else {
         colorShades = color
       }
-      const colorShadesComputed = fillColorShades(colorShades, saturationFactor, lightFactor)
+      const colorShadesComputed = fillColorShades(colorShades, saturationFactor, lightFactor, theme.isDark)
       let shade: keyof ColorShades
       for (shade in colorShadesComputed) {
         const key = paletteKeyShade2CSSVariable(classPrefix, paletteKey, shade)

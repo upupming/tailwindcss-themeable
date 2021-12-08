@@ -12,8 +12,8 @@
     "prepare": "husky install"
   },
   "files": [
-    "dist",
-    "src"
+    "/dist",
+    "/src"
   ],
   "repository": {
     "type": "git",

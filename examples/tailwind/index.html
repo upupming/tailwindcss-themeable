@@ -157,7 +157,7 @@
             </p>
           </blockquote>
           <figcaption class="font-medium">
-            <div class="text-themeable-cyan-50">Author: Yiming Li</div>
+            <div class="text-themeable-cyan-300">Author: Yiming Li</div>
             <div class="text-themeable-foreground">GitHub ID: upupming</div>
           </figcaption>
         </div>
@@ -168,18 +168,19 @@
           z-10
           rounded-xl
           shadow-lg shadow-themeable-foreground
-          divide-y-2 divide-themeable-orange-500
+          divide-y-2 divide-themeable-orange-300
           flex flex-col
         "
       >
-        <section class="flex flex-row">
+        <section class="flex flex-row <sm:flex-col">
           <h3
             class="
               flex-none
+              <sm:w-full <sm:rounded-tr-xl
               w-48
-              border-themeable-orange-500 border-t-2 border-l-2
-              bg-themeable-orange-50
-              text-themeable-orange-500
+              border-themeable-orange-300 border-t-2 border-l-2
+              bg-themeable-orange-800
+              text-themeable-orange-300
               rounded-tl-xl
               text-lg
               leading-6
@@ -196,6 +197,7 @@
               flex-auto
               bg-themeable-selection
               rounded-tr-xl
+              <sm:rounded-tr-none
               px-4
               py-6
               p-6
@@ -227,14 +229,15 @@
             </div>
           </dl>
         </section>
-        <section class="flex flex-row overflow-hidden">
+        <section class="flex flex-row overflow-hidden <sm:flex-col">
           <h3
             class="
               flex-none
+              <sm:w-full <sm:rounded-none
               w-48
-              bg-themeable-orange-50
-              text-themeable-orange-500
-              border-themeable-orange-500 border-b-2 border-l-2
+              border-themeable-orange-300 border-l-2 border-b-2
+              bg-themeable-orange-800
+              text-themeable-orange-300
               rounded-bl-xl
               text-lg
               leading-6
@@ -252,6 +255,7 @@
               flex-auto
               bg-themeable-selection
               rounded-br-xl
+              <sm:rounded-bl-xl
               overflow-hidden
               text-themeable-foreground
             "
