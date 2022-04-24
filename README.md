@@ -28,6 +28,7 @@ You can just develop your app with one theme and it will work with multiple them
 | Override shades                      | https://upupming.site/tailwindcss-themeable/override-shades/                          | [examples/override-shades](examples/override-shades)                                      |
 | Customized palette keys              | https://upupming.site/tailwindcss-themeable/customized-palette-keys/                  | [examples/customized-palette-keys](examples/customized-palette-keys)                      |
 | vue3-compact-template themed example | https://upupming.site/vue3-compact-template/storybook/?path=/story/components--themed | https://github.com/upupming/vue3-compact-template/blob/main/src/stories/ThemedExample.vue |
+| new-grad-positions                   | https://upupming.site/new-grad-positions/                                             | https://github.com/upupming/new-grad-positions                                            |
 
 ## Installation
 
